@@ -1,0 +1,140 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Backend
+metadata:
+  name: bayesian-api-backend
+  namespace: 3scale-project
+spec:
+  description: Bayesian API Backend
+  mappingRules:
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: stack-report-get
+      pattern: /api/v2/stack-report/
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: ca-get-v2-npm
+      pattern: /api/v2/component-analyses/npm/
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: ca-get-v2-maven
+      pattern: /api/v2/component-analyses/maven/
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: ca-get-v2-pypi
+      pattern: /api/v2/component-analyses/pypi/
+    - httpMethod: PUT
+      increment: 1
+      metricMethodRef: user-put
+      pattern: /user
+    - httpMethod: POST
+      increment: 1
+      metricMethodRef: user-post
+      pattern: /user
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: user-get
+      pattern: /user
+    - httpMethod: POST
+      increment: 1
+      metricMethodRef: sa-post
+      pattern: /api/v2/stack-analyses
+    - httpMethod: OPTIONS
+      increment: 1
+      metricMethodRef: sa-get
+      pattern: /api/v2/stack-analyses/
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: sa-get
+      pattern: /api/v2/stack-analyses/
+    - httpMethod: POST
+      increment: 1
+      metricMethodRef: submit-feedback-post
+      pattern: /api/v1/submit-feedback
+    - httpMethod: OPTIONS
+      increment: 1
+      metricMethodRef: submit-feedback-get
+      pattern: /api/v1/submit-feedback
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: ca-get-v2
+      pattern: /api/v2/component-analyses/
+    - httpMethod: POST
+      increment: 1
+      metricMethodRef: ca-post-v2
+      pattern: /api/v2/component-analyses
+    - httpMethod: POST
+      increment: 1
+      metricMethodRef: vulnerability-analysis-post
+      pattern: /api/v2/vulnerability-analysis
+    - httpMethod: GET
+      increment: 1
+      metricMethodRef: premium-token-get
+      pattern: /api/v2/get-token
+  metrics:
+    hits:
+      description: Number of API hits
+      friendlyName: Hits
+      unit: hit
+    sa-get:
+      description: Metrics to track number if hits on /stack-analysis [GET] endpoint
+      friendlyName: sa-get
+      unit: hit
+    sa-post:
+      description: Metrics to track number if hits on /stack-analysis [POST] endpoint
+      friendlyName: sa-post
+      unit: hit
+    ca-get-v2:
+      description: Metrics to track number if hits on /component-analyses v2 [GET] endpoint
+      friendlyName: ca-get-v2
+      unit: hit
+    ca-get-v2-npm:
+      description: Metrics to track number if hits on /component-analyses v2 npm [GET] endpoint
+      friendlyName: ca-get-v2-npm
+      unit: hit
+    ca-get-v2-pypi:
+      description: Metrics to track number if hits on /component-analyses v2 PyPI [GET] endpoint
+      friendlyName: ca-get-v2-pypi
+      unit: hit
+    ca-get-v2-maven:
+      description: Metrics to track number if hits on /component-analyses v2 Maven [GET] endpoint
+      friendlyName: ca-get-v2-maven
+      unit: hit
+    ca-post-v2:
+      description: Metrics to track number if hits on /component-analyses v2 [POST] endpoint
+      friendlyName: ca-post-v2
+      unit: hit
+    user-post:
+      description: Metrics to track number if hits on /stack-user [POST] endpoint
+      friendlyName: user-post
+      unit: hit
+    user-put:
+      description: Metrics to track number if hits on /stack-user [PUT] endpoint
+      friendlyName: user-put
+      unit: hit
+    user-get:
+      description: Metrics to track number if hits on /stack-user [GET] endpoint
+      friendlyName: user-get
+      unit: hit
+    submit-feedback-post:
+      description: Metrics to track number if hits on /submit-feedback [POST] endpoint
+      friendlyName: submit-feedback-post
+      unit: hit
+    submit-feedback-get:
+      description: Metrics to track number if hits on /submit-feedback [GET] endpoint
+      friendlyName: submit-feedback-get
+      unit: hit
+    premium-token-get:
+      description: Metrics to track number if hits on /get-token [GET] endpoint
+      friendlyName: premium-token-get
+      unit: hit
+    vulnerability-analysis-post:
+      description: Metrics to track number if hits on /vulnerability-analysis [POST] endpoint
+      friendlyName: vulnerability-analysis-post
+      unit: hit
+    stack-report-get:
+      description: Metrics to track number if hits on /stack-report [GET] endpoint
+      friendlyName: stack-report-get
+      unit: hit
+  name: bayesian-api-backend
+  privateBaseURL: 'http://bayesian-api.sssc.svc.cluster.local:32000'
+  systemName: bayesian-api-backend

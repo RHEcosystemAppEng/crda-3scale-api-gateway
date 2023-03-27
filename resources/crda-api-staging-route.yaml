@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: crda-api-staging
+  namespace: 3scale-project
+spec:
+  host: api-staging.<WILDCARD_DOMAIN>
+  to:
+    kind: Service
+    name: apicast-staging
+    weight: 100
+  port:
+    targetPort: gateway
+  wildcardPolicy: None

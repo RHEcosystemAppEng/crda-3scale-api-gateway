@@ -1,0 +1,56 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Product
+metadata:
+  name: fabric8-analytics
+  namespace: 3scale-project
+spec:
+  name: fabric8-analytics
+  deployment:
+    apicastSelfManaged:
+      stagingPublicBaseURL: "http://api-staging.<WILDCARD_DOMAIN>"
+      productionPublicBaseURL: "http://api-production.<WILDCARD_DOMAIN>"
+  applicationPlans:
+    plan01:
+      name: free-tier
+      published: true
+    plan02:
+      name: premium-tier
+      published: true
+  backendUsages:
+    bayesian-api-backend:
+      path: /
+  metrics:
+    hits:
+      description: Number of API hits
+      friendlyName: Hits
+      unit: hit
+  policies:
+    - configuration:
+        allow_headers:
+          - Authorization
+          - content-type
+          - user_key
+          - uuid
+        allow_methods:
+          - GET
+          - POST
+          - PUT
+        allow_origin: '*'
+      enabled: true
+      name: cors
+      version: builtin
+    - configuration: {}
+      enabled: true
+      name: apicast
+      version: builtin
+    - configuration:
+        request:
+          - header: x-3scale-account-secret
+            op: set
+            value: <SECRET_PLACEHOLDER>
+            value_type: plain
+        response: []
+      enabled: true
+      name: headers
+      version: builtin
+  systemName: fabric8analytics

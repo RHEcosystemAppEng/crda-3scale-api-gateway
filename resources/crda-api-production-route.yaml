@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: crda-api-production
+  namespace: 3scale-project
+spec:
+  host: api-production.<WILDCARD_DOMAIN>
+  to:
+    kind: Service
+    name: apicast-production
+    weight: 100
+  port:
+    targetPort: gateway
+  wildcardPolicy: None
